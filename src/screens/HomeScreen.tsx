@@ -1,9 +1,8 @@
-import {render} from "@testing-library/react-native"
-import HomeScreen from "./__tests__/HomeScreen.test"
+import React from 'react';
+import {View} from 'react-native';
 
-describe('HomeScreen', () => {
-    test('Should render correctly', () => {
-        const wrapper = render(<HomeScreen />)
-        wrapper.getByTestId("home-screen")
-    })
-})
+function HomeScreen() {
+  return <View testID="home-screen" />;
+}
+
+export default HomeScreen;
