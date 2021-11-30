@@ -7,4 +7,19 @@ describe('HomeScreen', () => {
     const wrapper = render(<HomeScreen />)
     wrapper.getByTestId('home-screen')
   })
+
+  describe('title section', () => {
+    beforeEach(() => {
+      jest.useFakeTimers('modern')
+      jest.setSystemTime(95668400000) // Correspond to 1 JAN 2000
+    })
+    afterEach(() => {
+      jest.useRealTimers()
+    })
+
+    test('should contain current date', () => {
+      const wrapper = render(<HomeScreen />)
+      wrapper.getByText('Jan 01, 2000')
+    })
+  })
 })
