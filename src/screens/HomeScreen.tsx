@@ -11,7 +11,7 @@ function HomeScreen() {
 
   return (
     <LinearGradient
-      colors={[Colors.LIGHT_GRAY, Colors.DARK_GRAY]}
+      colors={[Colors.LIGHT_GRAY, Colors.DARKER_GRAY]}
       testID="home-screen"
       style={styles.container}>
       <View style={styles.title}>
