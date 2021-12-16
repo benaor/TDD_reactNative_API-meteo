@@ -11,7 +11,6 @@ import Button from './Button'
 type FormValues = {
   latitude: string
   longitude: string
-  errors?: any
 }
 
 function WeatherCoordinates() {
@@ -27,7 +26,6 @@ function WeatherCoordinates() {
   const defaultValues: FormValues = {
     latitude: '',
     longitude: '',
-    errors: null,
   }
 
   const form = useForm<FormValues>({
@@ -45,7 +43,7 @@ function WeatherCoordinates() {
       <View style={styles.inputs}>
         <Controller
           control={form.control}
-          render={({onChange, ...p}) => (
+          render={({field: {onChange, ...p}}) => (
             <TextInput
               {...p}
               testID="weather-coordinates-latitude"
@@ -57,14 +55,14 @@ function WeatherCoordinates() {
           )}
           name="latitude"
         />
-        {form.errors?.latitude && (
+        {form.formState.errors?.latitude && (
           <Text style={styles.error}>
             La latitude doit être un nombre valide
           </Text>
         )}
         <Controller
           control={form.control}
-          render={({onChange, ...p}) => (
+          render={({field: {onChange, ...p}}) => (
             <TextInput
               {...p}
               testID="weather-coordinates-longitude"
@@ -76,7 +74,7 @@ function WeatherCoordinates() {
           )}
           name="longitude"
         />
-        {form.errors?.longitude && (
+        {form.formState.errors?.longitude && (
           <Text style={styles.error}>
             La longitude doit être un nombre valide
           </Text>
