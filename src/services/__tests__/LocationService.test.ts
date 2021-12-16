@@ -1,7 +1,8 @@
 import LocationService from '../LocationService'
 
 describe('LocationService', () => {
-  test('should return latitude and longitude of the current location', async () => {
+  // Doit renvoyer la latitude et la longitude de l'emplacement actuel
+  test('Should return latitude & longitude from current location', async () => {
     const position = await LocationService.getCurrentPosition()
     expect(position).toEqual({
       latitude: 0,
