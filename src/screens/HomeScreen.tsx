@@ -8,7 +8,6 @@ import {Colors} from '../constants'
 
 function HomeScreen() {
   const now = moment(new Date())
-
   return (
     <LinearGradient
       colors={[Colors.LIGHT_GRAY, Colors.DARKER_GRAY]}
@@ -19,7 +18,9 @@ function HomeScreen() {
         <Text style={styles.day}>{now.format('dddd')}</Text>
       </View>
       <WeatherCurrent />
-      <Text testID="home-screen-divider" style={styles.divider}></Text>
+      <Text testID="home-screen-divider" style={styles.divider}>
+        Or
+      </Text>
       <WeatherCoordinates />
     </LinearGradient>
   )
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
   },
   date: {
     color: Colors.GRAY,
+    fontSize: 13,
   },
   day: {
     color: Colors.WHITE,
