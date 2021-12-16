@@ -1,16 +1,15 @@
-import {NavigationContainer} from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import React from 'react'
-import {View} from 'react-native'
+import {createStackNavigator} from '@react-navigation/stack'
+import {NavigationContainer} from '@react-navigation/native'
 import HomeScreen from './HomeScreen'
 import WeatherScreen from './WeatherScreen'
 
 export type RootStackParamList = {
   Home: undefined
-  Weather: {latitude: Number; longitude: Number}
+  Weather: {latitude: number; longitude: number}
 }
 
-const RootStack = createNativeStackNavigator<RootStackParamList>()
+const RootStack = createStackNavigator<RootStackParamList>()
 
 function AppNavigator() {
   return (
