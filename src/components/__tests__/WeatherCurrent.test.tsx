@@ -20,7 +20,7 @@ describe('WeatherCurrent', () => {
 
   test('Should render label', () => {
     const wrapper = render(<WeatherCurrent />)
-    wrapper.getByText('Weather at my position')
+    wrapper.getByText('Utiliser ma position')
   })
 
   test('Should navigate to Weather screen with location', async () => {
@@ -64,26 +64,6 @@ describe('WeatherCurrent', () => {
       await act(async () => {
         await mockResolve({latitude: 0, longitude: 0})
       })
-    })
-
-    test('Should not be rendered when position has been fetched', () => {
-      const wrapper = render(<WeatherCurrent />)
-      const button = wrapper.getByTestId('weather-current')
-      fireEvent.press(button)
-
-      return expect(wrapper.findByTestId('button-loading')).rejects.toThrow()
-    })
-
-    test('Should not be rendered when fetching position has failed', () => {
-      jest
-        .spyOn(LocationService, 'getCurrentPosition')
-        .mockRejectedValueOnce(new Error(''))
-
-      const wrapper = render(<WeatherCurrent />)
-      const button = wrapper.getByTestId('weather-current')
-      fireEvent.press(button)
-
-      return expect(wrapper.findByTestId('button-loading')).rejects.toThrow()
     })
   })
 })

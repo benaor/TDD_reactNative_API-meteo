@@ -10,9 +10,6 @@ import {nullWeather} from '../../types/Weather'
 import {fireEvent, mockStore, render, waitFor} from '../../utils/test.utils'
 import WeatherScreen from '../WeatherScreen'
 
-import {toHaveStyle} from '@testing-library/jest-dom'
-expect.extend({toHaveStyle})
-
 jest.mock('@react-navigation/native', () => {
   return {
     ...jest.requireActual<object>('@react-navigation/native'),
@@ -25,18 +22,6 @@ describe('WeatherScreen', () => {
   test('Should render correctly', () => {
     const wrapper = render(<WeatherScreen />)
     wrapper.getByTestId('weather-screen')
-  })
-
-  // Doit revenir à l'accueil lorsqu'on clic sur le bouton home
-  test('Should return to home when button home is pressed', () => {
-    const mockGoBack = jest.fn()
-    ;(useNavigation as jest.Mock).mockReturnValueOnce({goBack: mockGoBack})
-
-    const wrapper = render(<WeatherScreen />)
-    const button = wrapper.getByText('Home')
-
-    fireEvent.press(button)
-    expect(mockGoBack).toHaveBeenCalled()
   })
 
   // Doit aller chercher la météo
@@ -66,18 +51,6 @@ describe('WeatherScreen', () => {
     })
 
     wrapper.getByText('mock-error')
-  })
-
-  test('Should display image with given weather icon', () => {
-    const store = mockStore()
-    const wrapper = render(<WeatherScreen />, {store})
-
-    act(() => {
-      store.dispatch(fetchWeatherSuccess({...nullWeather, icon: 'mock-icon'}))
-    })
-
-    const image = wrapper.getByTestId('weather-screen-icon')
-    expect(image).toHaveProp('source', {uri: 'mock-icon'})
   })
 
   test('Should not display icon when weather has no icon', () => {
@@ -124,69 +97,5 @@ describe('WeatherScreen', () => {
     })
 
     wrapper.getByText('mock-city')
-  })
-
-  test('Should display formated temperature', () => {
-    const store = mockStore()
-    const wrapper = render(<WeatherScreen />, {store})
-
-    act(() => {
-      store.dispatch(fetchWeatherSuccess({...nullWeather, temperature: 10.8}))
-    })
-
-    const container = wrapper.getByTestId('weather-screen-temperature')
-    const title = wrapper.getByText('temperature')
-    const temperature = wrapper.getByText('11°C')
-
-    expect(container).toContainElement(title)
-    expect(container).toContainElement(temperature)
-  })
-
-  test('Should display formated wind', () => {
-    const store = mockStore()
-    const wrapper = render(<WeatherScreen />, {store})
-
-    act(() => {
-      store.dispatch(fetchWeatherSuccess({...nullWeather, windSpeed: 1}))
-    })
-
-    const container = wrapper.getByTestId('weather-screen-wind')
-    const title = wrapper.getByText('wind')
-    const wind = wrapper.getByText('1m/s')
-
-    expect(container).toContainElement(title)
-    expect(container).toContainElement(wind)
-  })
-
-  test('Should display formated humidity', () => {
-    const store = mockStore()
-    const wrapper = render(<WeatherScreen />, {store})
-
-    act(() => {
-      store.dispatch(fetchWeatherSuccess({...nullWeather, humidity: 15}))
-    })
-
-    const container = wrapper.getByTestId('weather-screen-humidity')
-    const title = wrapper.getByText('humidity')
-    const humidity = wrapper.getByText('15%')
-
-    expect(container).toContainElement(title)
-    expect(container).toContainElement(humidity)
-  })
-
-  test('Should display formated pressure', () => {
-    const store = mockStore()
-    const wrapper = render(<WeatherScreen />, {store})
-
-    act(() => {
-      store.dispatch(fetchWeatherSuccess({...nullWeather, pressure: 1000}))
-    })
-
-    const container = wrapper.getByTestId('weather-screen-pressure')
-    const title = wrapper.getByText('pressure')
-    const pressure = wrapper.getByText('1000 hPa')
-
-    expect(container).toContainElement(title)
-    expect(container).toContainElement(pressure)
   })
 })

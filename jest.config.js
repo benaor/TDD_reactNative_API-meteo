@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   preset: 'react-native',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   setupFilesAfterEnv: [
@@ -9,3 +9,5 @@ module.exports = {
     'node_modules/(?!(jest-)?@react-native|react-native|@react-native-community|@react-navigation)',
   ],
 }
+
+module.exports = config

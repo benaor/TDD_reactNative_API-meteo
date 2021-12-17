@@ -18,14 +18,15 @@ function WeatherCurrent() {
       navigation.navigate('Weather', position)
     } catch (e) {
       setError(true)
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }, [navigation])
 
   return (
     <Button
       testID="weather-current"
-      label="Weather at my position"
+      label="Utiliser ma position"
       onPress={handleFetchWeather}
       loading={loading}
       style={error && styles.error}
